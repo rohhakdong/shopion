@@ -2,12 +2,16 @@ package com.shopion.service;
 
 import com.shopion.domain.notice.Notice;
 import com.shopion.domain.notice.NoticeRepository;
+import com.shopion.web.dto.NoticeListResponseDto;
 import com.shopion.web.dto.NoticeResponseDto;
 import com.shopion.web.dto.NoticeSaveRequestDto;
 import com.shopion.web.dto.NoticeUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -32,5 +36,10 @@ public class NoticeService {
         Notice entity = noticeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 공지사항이 없습니다. id=" + id));
         return new NoticeResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<NoticeListResponseDto> findAll() {
+        return noticeRepository.findAll().stream().map(NoticeListResponseDto::new).collect(Collectors.toList());
     }
 }

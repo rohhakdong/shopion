@@ -6,5 +6,26 @@
                 <a href="/notice/save" role="button" class="btn btn-primary">Write</a>
             </div>
         </div>
+        <br/>
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Modified</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            {{#noticeList}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{title}}</td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/noticeList}}
+            </tbody>
+        </table>
     </div>
 {{>layout/footer}}
