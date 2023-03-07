@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
-@Service
-public class NoticeService {
+    @RequiredArgsConstructor
+    @Service
+    public class NoticeService {
 
     private final NoticeRepository noticeRepository;
 
@@ -41,5 +41,12 @@ public class NoticeService {
     @Transactional(readOnly = true)
     public List<NoticeListResponseDto> findAll() {
         return noticeRepository.findAll().stream().map(NoticeListResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete (Long id) {
+        Notice notice = noticeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Notice number " + id + " does not exist"));
+        noticeRepository.delete(notice);
     }
 }

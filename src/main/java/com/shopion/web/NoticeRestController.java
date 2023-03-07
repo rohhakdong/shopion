@@ -23,6 +23,12 @@ public class NoticeRestController {
         return noticeService.update(id, requestDto);
     }
 
+    @DeleteMapping("/rest/v1/notice/{id}")
+    public Long delete(@PathVariable Long id) {
+        noticeService.delete(id);
+        return id;
+    }
+
     @GetMapping("/rest/v1/notice/{id}")
     public NoticeResponseDto findById(@PathVariable Long id) {
         return noticeService.findById(id);
