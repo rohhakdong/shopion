@@ -16,10 +16,10 @@ public class WordDictSaveRequestDto {
     private String engAbbr;
 
     @Builder
-    public WordDictSaveRequestDto(WordDict entity) {
-        this.korWord = entity.getKorWord();
-        this.engWord = entity.getEngWord();
-        this.engAbbr = entity.getEngAbbr();
+    public WordDictSaveRequestDto(String korWord, String engWord, String engAbbr) {
+        this.korWord = korWord;
+        this.engWord = engWord;
+        this.engAbbr = engAbbr;
     }
 
     public WordDict toEntity() {

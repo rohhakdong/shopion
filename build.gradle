@@ -18,7 +18,10 @@ apply plugin: 'io.spring.dependency-management'
 
 group 'com.shopion'
 version '1.0-SNAPSHOT'
-sourceCompatibility = 1.8
+
+java {
+    sourceCompatibility = 1.8
+}
 
 repositories {
     mavenCentral()

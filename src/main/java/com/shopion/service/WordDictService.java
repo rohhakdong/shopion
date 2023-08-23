@@ -24,9 +24,9 @@ public class WordDictService {
     }
 
     @Transactional
-    public String update(String korName, WordDictSaveRequestDto requestDto) {
-        WordDict WordDict = wordDictRepository.findById(korName)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 단어사전이 없습니다. '" + korName + "'"));
+    public String update(String korWord, WordDictSaveRequestDto requestDto) {
+        WordDict WordDict = wordDictRepository.findById(korWord)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 단어사전이 없습니다. '" + korWord + "'"));
         WordDict.update(requestDto.getEngWord(),requestDto.getEngAbbr());
 
         /*
@@ -34,7 +34,7 @@ public class WordDictService {
         modelAttrDAO.updateWordDict(wordDict);
          */
 
-        return korName;
+        return korWord;
     }
 
     @Transactional
