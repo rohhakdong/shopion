@@ -2,6 +2,9 @@ package com.shopion.web;
 
 import com.shopion.domain.code.WordDict;
 import com.shopion.domain.code.WordDictRepository;
+import com.shopion.domain.notice.Notice;
+import com.shopion.web.dto.NoticeUpdateRequestDto;
+import com.shopion.web.dto.WordDictListResponseDto;
 import com.shopion.web.dto.WordDictSaveRequestDto;
 
 import org.junit.jupiter.api.AfterEach;
@@ -10,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class WordDictRestControllerTest {
     }
 
     @Test
-    public void WordDictUpdate() throws Exception {
+    public void wordDictUpdate() throws Exception {
         String korWord = "계좌";
         String engWord = "account";
         String engAbbr = "acnt";
@@ -90,11 +91,35 @@ public class WordDictRestControllerTest {
         ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        //assertThat(responseEntity.getBody()).isGreaterThan((0L));
 
         List<WordDict> all = wordDictRepository.findAll();
         assertThat(all.get(0).getEngWord()).isEqualTo(expectedEngWord);
         assertThat(all.get(0).getEngAbbr()).isEqualTo(expectedEngAbbr);
 
+    }
+
+    @Test
+    public void wordDictList() {
+
+        String korWord = "계좌";
+        String engWord = "account";
+        String engAbbr = "acnt";
+
+        WordDict wordDict = wordDictRepository.save(WordDict.builder()
+                .korWord(korWord)
+                .engWord(engWord)
+                .engAbbr(engAbbr)
+                .build());
+
+        String url = "http://localhost:" + port + "/rest/v1/wordDict/" + korWord;
+
+        ResponseEntity<List<WordDictListResponseDto>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<WordDictListResponseDto>>(){});
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        List<WordDictListResponseDto> all = responseEntity.getBody();
+        assertThat(all.get(0).getKorWord()).isEqualTo(korWord);
+        assertThat(all.get(0).getEngWord()).isEqualTo(engWord);
+        assertThat(all.get(0).getEngAbbr()).isEqualTo(engAbbr);
     }
 }

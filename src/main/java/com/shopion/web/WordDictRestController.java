@@ -3,6 +3,9 @@ package com.shopion.web;
 import com.shopion.service.WordDictService;
 import com.shopion.web.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,8 +32,8 @@ public class WordDictRestController {
         return korWord;
     }
 
-    @GetMapping("/rest/v1/wordDict/{korWord}&{engWord}")
-    public List<WordDictListResponseDto> findAll(@PathVariable String korWord, @PathVariable String engWord) {
-        return wordDictService.findAll(korWord, engWord);
+    @GetMapping(value = "/rest/v1/wordDict/{korWord}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<WordDictListResponseDto>> findAll(@PathVariable String korWord) {
+        return new ResponseEntity<>(wordDictService.findAll(korWord, ""), HttpStatus.OK);
     }
 }

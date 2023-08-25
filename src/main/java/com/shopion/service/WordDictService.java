@@ -58,8 +58,7 @@ public class WordDictService {
 
     @Transactional(readOnly = true)
     public List<WordDictListResponseDto> findAll(String korWord, String engWord) {
-        return wordDictRepository.findByKorWordContainingOrEngWordContaining(korWord, engWord).stream().map(WordDictListResponseDto::new).collect(Collectors.toList());
-        //return wordDictRepository.findAll().stream().map(WordDictListResponseDto::new).collect(Collectors.toList());
+        return wordDictRepository.findAll().stream().map(WordDictListResponseDto::new).collect(Collectors.toList());
     }
 
 }
