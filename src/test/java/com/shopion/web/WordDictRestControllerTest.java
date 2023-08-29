@@ -111,7 +111,7 @@ public class WordDictRestControllerTest {
                 .engAbbr(engAbbr)
                 .build());
 
-        String url = "http://localhost:" + port + "/rest/v1/wordDict/" + korWord;
+        String url = "http://localhost:" + port + "/rest/v1/wordDict/" + korWord + "&" + engWord;
 
         ResponseEntity<List<WordDictListResponseDto>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<WordDictListResponseDto>>(){});
 

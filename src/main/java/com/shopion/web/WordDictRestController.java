@@ -32,8 +32,8 @@ public class WordDictRestController {
         return korWord;
     }
 
-    @GetMapping(value = "/rest/v1/wordDict/{korWord}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<WordDictListResponseDto>> findAll(@PathVariable String korWord) {
-        return new ResponseEntity<>(wordDictService.findAll(korWord, ""), HttpStatus.OK);
+    @GetMapping(value = "/rest/v1/wordDict/{korWord}&{engWord}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<WordDictListResponseDto>> findAll(@PathVariable String korWord, @PathVariable String engWord) {
+        return new ResponseEntity<>(wordDictService.findAll(korWord, engWord), HttpStatus.OK);
     }
 }
