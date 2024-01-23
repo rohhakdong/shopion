@@ -1,4 +1,4 @@
-package com.shopion.web.domain.code;
+package com.shopion.domain.code;
 
 import com.shopion.domain.code.WordDict;
 import com.shopion.domain.code.WordDictRepository;

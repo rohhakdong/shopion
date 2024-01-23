@@ -1,4 +1,4 @@
-package com.shopion.web.domain.member;
+package com.shopion.domain.member;
 
 import java.util.Optional;
 import java.util.stream.IntStream;

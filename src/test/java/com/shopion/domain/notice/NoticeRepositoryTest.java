@@ -1,4 +1,4 @@
-package com.shopion.web.domain.notice;
+package com.shopion.domain.notice;
 
 import com.shopion.domain.notice.Notice;
 import com.shopion.domain.notice.NoticeRepository;
